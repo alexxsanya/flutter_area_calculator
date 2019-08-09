@@ -61,6 +61,7 @@ class _AreaCalculatorState extends State<AreaCalculator> {
                       currentShape = shape;
                     }); 
                   }),
+              ShapeContainer(shape: currentShape,),
             //width
               AreaTextField(controller: widthController, hint: 'Width'),
             //height
@@ -162,15 +163,17 @@ class ShapeContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (shape == 'triangle'){
+    if (shape == 'Triangle'){
       return CustomPaint(
         size: Size(100, 100),
         painter: TrainglePainter()
       );
+    } else{
+      return CustomPaint(
+        size: Size(100, 100),
+        painter: RectanglePainter()
+      );
     }
-    return Container(
-              
-    );
   }
 }
         
@@ -194,5 +197,24 @@ class TrainglePainter extends CustomPainter{
   bool shouldRepaint(CustomPainter oldDelegate) {
     // TODO: implement shouldRepaint
     return true;
+  }
+}
+
+class RectanglePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    // TODO: implement paint
+    final paint = Paint();
+    paint.color = Colors.black12;
+    
+    Rect rect = Rect.fromLTRB(0, size.height/4, size.width, size.height/4*3)
+    canvas.drawRect(rect, paint);
+
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    // TODO: implement shouldRepaint
+    return null;
   }
 }
