@@ -37,7 +37,7 @@ class _AreaCalculatorState extends State<AreaCalculator> {
       
     super.initState();
     result = '0';
-    currentShape = 'Rectangle';
+    currentShape = 'Triangle';
     widthController.addListener(updateWidth);
     heightController.addListener(updateHeight);
   }
@@ -45,7 +45,8 @@ class _AreaCalculatorState extends State<AreaCalculator> {
   Widget build(BuildContext context) {
     return Container(
           margin:EdgeInsets.only(top:15.0),
-          child: Column(children: <Widget>[
+          child: SingleChildScrollView(
+            child: Column(children: <Widget>[
             //dropdown
               DropdownButton<String>(
                 value:currentShape,
@@ -82,7 +83,8 @@ class _AreaCalculatorState extends State<AreaCalculator> {
                   color: Colors.green[700],
                 ),),
           ],)
-        );
+        ),
+      );
   }
 
   void calculateArea() {
@@ -165,12 +167,12 @@ class ShapeContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     if (shape == 'Triangle'){
       return CustomPaint(
-        size: Size(100, 100),
+        size: Size(100.0, 100.0),
         painter: TrainglePainter()
       );
     } else{
       return CustomPaint(
-        size: Size(100, 100),
+        size: Size(100.0, 100.0),
         painter: RectanglePainter()
       );
     }
@@ -185,7 +187,7 @@ class TrainglePainter extends CustomPainter{
     paint.color = Colors.black;
 
     var path = Path();
-    path.moveTo(size.width/2, 0);
+    path.moveTo(size.width/2, 0.0);
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);
     path.close();
@@ -205,16 +207,15 @@ class RectanglePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     // TODO: implement paint
     final paint = Paint();
-    paint.color = Colors.black12;
+    paint.color = Colors.deepPurple;
     
-    Rect rect = Rect.fromLTRB(0, size.height/4, size.width, size.height/4*3)
+    Rect rect = Rect.fromLTRB(0.0, size.height/4, size.width, size.height/4*3);
     canvas.drawRect(rect, paint);
-
   }
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     // TODO: implement shouldRepaint
-    return null;
+    return true;
   }
 }
